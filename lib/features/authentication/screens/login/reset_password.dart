@@ -9,7 +9,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+  const ResetPassword({super.key, required this.email});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,12 @@ class ResetPassword extends StatelessWidget {
                 width: THelperFunctions.screenWidth() * 0.6,
               ),
               const Gap(TSizes.spaceBtwSections),
-
+              Text(
+                email,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+              const Gap(TSizes.spaceBtwSections),
               //Title and Subtitle
               Text(
                 TTexts.changeYourPasswordTitle,

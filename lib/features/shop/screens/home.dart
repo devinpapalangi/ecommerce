@@ -1,14 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/commons/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce/commons/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/commons/widgets/layout/grid_layout.dart';
 import 'package:ecommerce/commons/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:ecommerce/commons/widgets/shimmer_effect/vertical_product_shimmer.dart';
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/product/products_controller.dart';
 import 'package:ecommerce/features/shop/screens/all_shop.dart';
 import 'package:ecommerce/features/shop/screens/widgets/home/home_appbar.dart';
 import 'package:ecommerce/features/shop/screens/widgets/home/home_categories.dart';
 import 'package:ecommerce/features/shop/screens/widgets/home/promo_slider.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
-import 'package:ecommerce/utils/contants/image_strings.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -63,25 +66,40 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
-                  const PromoSlider(
-                    banners: [
-                      TImages.promoBanner1,
-                      TImages.promoBanner2,
-                      TImages.promoBanner3
-                    ],
-                  ),
+                  const PromoSlider(),
                   const Gap(TSizes.spaceBtwSections),
                   SectionHeading(
                     title: 'Popular Products',
                     showActionButton: true,
                     onPressed: () => Get.to(
-                      () => const AllProductsScreen(),
+                      () => AllProductsScreen(
+                        title: 'Popular Products',
+                        query: FirebaseFirestore.instance
+                            .collection('Products')
+                            .where('IsFeature', isEqualTo: true),
+                        futureMethod: controller.fetchAllProducts(),
+                      ),
                     ),
                   ),
-                  GridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const ProductCardVertical(),
-                  )
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const VerticalProductShimmer();
+                    }
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No Data Found!',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
+                    return GridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => ProductCardVertical(
+                          product: controller.featuredProducts[index]),
+                    );
+                  })
                 ],
               ),
             ),

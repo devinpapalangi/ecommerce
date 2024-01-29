@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce/commons/widgets/shimmer_effect/shimmer_effect.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
@@ -8,7 +10,7 @@ class CircularImage extends StatelessWidget {
       {super.key,
       this.fit = BoxFit.contain,
       required this.image,
-      this.isNetworkImage = false,
+      this.isNetworkImage = true,
       this.overlayColor,
       this.backgroundColor,
       this.width = 56,
@@ -37,12 +39,25 @@ class CircularImage extends StatelessWidget {
             : Colors.transparent,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Image(
-          fit: fit,
-          image: isNetworkImage
-              ? NetworkImage(image)
-              : AssetImage(image) as ImageProvider,
-          color: overlayColor),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Center(
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  color: overlayColor,
+                  imageUrl: image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const TShimmerEffect(
+                    width: 55,
+                    height: 55,
+                    radius: 55,
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(fit: fit, image: AssetImage(image), color: overlayColor),
+        ),
+      ),
     );
   }
 }

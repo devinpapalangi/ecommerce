@@ -2,6 +2,7 @@ import 'package:ecommerce/commons/widgets/appbar/appbar.dart';
 import 'package:ecommerce/commons/widgets/images/rounded_images.dart';
 import 'package:ecommerce/commons/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/contants/image_strings.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,9 @@ class SubCategoriesScreen extends StatelessWidget {
                             const Gap(TSizes.spaceBtwItems),
                         itemCount: 4,
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (_, index) =>
-                            const ProductCardHorizontal()),
+                        itemBuilder: (_, index) => ProductCardHorizontal(
+                              product: ProductModel.empty(),
+                            )),
                   )
                 ],
               )

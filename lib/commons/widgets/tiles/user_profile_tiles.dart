@@ -1,4 +1,5 @@
 import 'package:ecommerce/commons/widgets/images/circular_images.dart';
+import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/features/personalization/screens/profile.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/image_strings.dart';
@@ -13,25 +14,37 @@ class UserProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return ListTile(
-      title: Text(
-        'Coding with T',
-        style: Theme.of(context)
-            .textTheme
-            .headlineSmall!
-            .apply(color: TColors.white),
+      title: Obx(
+        () => Text(
+          controller.user.value.fullName,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall!
+              .apply(color: TColors.white),
+        ),
       ),
-      subtitle: Text(
-        'codingwithT@gmail.com',
-        style:
-            Theme.of(context).textTheme.bodyMedium!.apply(color: TColors.white),
+      subtitle: Obx(
+        () => Text(
+          controller.user.value.email,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .apply(color: TColors.white),
+        ),
       ),
-      leading: const CircularImage(
-        image: TImages.user,
-        width: 50,
-        height: 50,
-        padding: 0,
-      ),
+      leading: Obx(() {
+        final networkImage = controller.user.value.profilePicture;
+        final image = networkImage.isEmpty ? TImages.user : networkImage;
+        return CircularImage(
+          image: image,
+          isNetworkImage: networkImage.isNotEmpty,
+          width: 50,
+          height: 50,
+          padding: 0,
+        );
+      }),
       trailing: IconButton(
         icon: const Icon(
           Iconsax.edit,

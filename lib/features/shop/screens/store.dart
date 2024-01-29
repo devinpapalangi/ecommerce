@@ -4,6 +4,7 @@ import 'package:ecommerce/commons/widgets/custom_shapes/containers/search_contai
 import 'package:ecommerce/commons/widgets/layout/grid_layout.dart';
 import 'package:ecommerce/commons/widgets/products/cart/cart_menu_icons.dart';
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/brands_controller.dart';
 import 'package:ecommerce/features/shop/screens/all_brand.dart';
 import 'package:ecommerce/features/shop/screens/widgets/store/brand_cart.dart';
 import 'package:ecommerce/features/shop/screens/widgets/store/category_tab.dart';
@@ -14,14 +15,18 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
+import '../controllers/category_controller.dart';
+
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categoryController = Get.put(CategoryController());
+    final brandController = Get.put(BrandController());
     final dark = THelperFunctions.isDarkMode(context);
     return DefaultTabController(
-      length: 5,
+      length: categoryController.featuredCategories.length,
       child: Scaffold(
         appBar: CustomAppBar(
           title: Text(
@@ -59,10 +64,12 @@ class StoreScreen extends StatelessWidget {
                         ),
                         const Gap(TSizes.spaceBtwItems / 1.5),
                         GridLayout(
-                          itemCount: 4,
+                          itemCount: brandController.brands.length,
                           mainAxisExtent: 80,
                           itemBuilder: (_, index) {
-                            return const BrandCard(
+                            final brand = brandController.brands[index];
+                            return BrandCard(
+                              brand: brand,
                               showBorder: false,
                             );
                           },
@@ -70,37 +77,18 @@ class StoreScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  bottom: const CustomTabBar(
-                    tabs: [
-                      Tab(
-                        child: Text('Sport'),
-                      ),
-                      Tab(
-                        child: Text('Furniture'),
-                      ),
-                      Tab(
-                        child: Text('Electronics'),
-                      ),
-                      Tab(
-                        child: Text('Clothes'),
-                      ),
-                      Tab(
-                        child: Text('Cosmethics'),
-                      ),
-                    ],
-                  ),
+                  bottom: CustomTabBar(
+                      tabs: categoryController.featuredCategories
+                          .map(
+                              (categories) => Tab(child: Text(categories.name)))
+                          .toList()),
                 ),
               ];
             },
-            body: const TabBarView(
-              children: [
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-              ],
-            )),
+            body: TabBarView(
+                children: categoryController.featuredCategories
+                    .map((categories) => CategoryTab(category: categories.name))
+                    .toList())),
       ),
     );
   }

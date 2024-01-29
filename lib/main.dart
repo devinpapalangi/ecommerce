@@ -1,6 +1,7 @@
 import 'package:ecommerce/bindings/general_bindings.dart';
 import 'package:ecommerce/data/repositories/authentication_repository/authentication_repository.dart';
 import 'package:ecommerce/firebase_options.dart';
+import 'package:ecommerce/routes/app_routes.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,6 +35,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,

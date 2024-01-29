@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
@@ -44,17 +45,14 @@ class RoundedImage extends StatelessWidget {
           color: dark ? TColors.dark : TColors.light,
           borderRadius: BorderRadius.circular(TSizes.md),
         ),
-        child: ClipRRect(
-          borderRadius: applyImageRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
-            fit: fit,
-          ),
-        ),
+        child: isNetworkImage
+            ? CachedNetworkImage(
+                fit: fit,
+                color: backgroundColor,
+                imageUrl: imageUrl,
+              )
+            : Image(
+                fit: fit, image: AssetImage(imageUrl), color: backgroundColor),
       ),
     );
   }

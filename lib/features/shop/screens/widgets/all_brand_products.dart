@@ -1,4 +1,5 @@
 import 'package:ecommerce/commons/widgets/appbar/appbar.dart';
+import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/features/shop/screens/widgets/all_shop/sortable_products.dart';
 import 'package:ecommerce/features/shop/screens/widgets/store/brand_cart.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
@@ -18,16 +19,17 @@ class AllBrandProducts extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               BrandCard(
+                brand: BrandModel.empty(),
                 showBorder: true,
               ),
-              Gap(TSizes.spaceBtwItems),
-              SortableProducts()
+              const Gap(TSizes.spaceBtwItems),
+              // const SortableProducts()
             ],
           ),
         ),

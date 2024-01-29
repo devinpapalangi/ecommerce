@@ -43,6 +43,8 @@ class TImages {
       "assets/icons/brands/herman-miller-logo.png";
   static const String ikeaLogo = "assets/icons/brands/ikea_logo.png";
   static const String acerlogo = "assets/icons/brands/acer_logo.png";
+  static const String samsungLogo = "assets/icons/brands/samsung-logo.png";
+  static const String tomiLogo = "assets/icons/brands/tomi-logo.png";
 
   // -- Animations
   static const String productsIllustration =

@@ -3,14 +3,13 @@ import 'package:ecommerce/commons/widgets/custom_shapes/containers/primary_heade
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
 import 'package:ecommerce/commons/widgets/tiles/settings_menu_tiles.dart';
 import 'package:ecommerce/commons/widgets/tiles/user_profile_tiles.dart';
-import 'package:ecommerce/data/repositories/authentication_repository/authentication_repository.dart';
-import 'package:ecommerce/features/authentication/screens/login/login.dart';
+import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
+import 'package:ecommerce/features/personalization/load_data.dart';
 import 'package:ecommerce/features/personalization/screens/adresses.dart';
 import 'package:ecommerce/features/shop/screens/cart.dart';
 import 'package:ecommerce/features/shop/screens/order.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -21,6 +20,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -98,11 +98,11 @@ class SettingsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   const Gap(TSizes.spaceBtwItems),
-                  const SettingsMenuTiles(
-                    icon: Iconsax.document_upload,
-                    title: 'Load Data',
-                    subtitle: 'Upload data to your Cloud Firebase',
-                  ),
+                  SettingsMenuTiles(
+                      icon: Iconsax.document_upload,
+                      title: 'Load Data',
+                      subtitle: 'Upload data to your Cloud Firebase',
+                      onTap: () => Get.to(() => const LoadDataScreen())),
                   SettingsMenuTiles(
                     icon: Iconsax.location,
                     title: 'Geolocation',
@@ -134,10 +134,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          AuthenticationRepository.instance.screenRedirect();
-                        },
+                        onPressed: () => controller.logoutUser(),
                         child: const Text(
                           'Logout',
                           style: TextStyle(color: Colors.red),

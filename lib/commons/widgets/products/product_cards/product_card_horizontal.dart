@@ -5,6 +5,7 @@ import 'package:ecommerce/commons/widgets/image_text_widget/brand_title_with_ico
 import 'package:ecommerce/commons/widgets/images/rounded_images.dart';
 import 'package:ecommerce/commons/widgets/texts/product_price.dart';
 import 'package:ecommerce/commons/widgets/texts/product_title.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/product_details.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/image_strings.dart';
@@ -16,13 +17,17 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
-  const ProductCardHorizontal({super.key});
+  const ProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailScreen()),
+      onTap: () => Get.to(() => ProductDetailScreen(
+            product: product,
+          )),
       child: Container(
         width: 310,
         padding: const EdgeInsets.all(1),

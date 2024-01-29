@@ -1,4 +1,5 @@
 import 'package:ecommerce/commons/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/features/shop/screens/widgets/store/brand_cart.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
@@ -20,7 +21,10 @@ class BrandShowcase extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       child: Column(
         children: [
-          const BrandCard(showBorder: false),
+          BrandCard(
+            showBorder: false,
+            brand: BrandModel.empty(),
+          ),
           Row(
             children: images
                 .map((image) => brandTopProductImageWidget(image, context))

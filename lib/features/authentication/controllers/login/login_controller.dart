@@ -1,10 +1,9 @@
 import 'package:ecommerce/data/repositories/authentication_repository/authentication_repository.dart';
-import 'package:ecommerce/features/authentication/screens/login/login.dart';
+import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/utils/contants/image_strings.dart';
 import 'package:ecommerce/utils/helpers/network_manager.dart';
 import 'package:ecommerce/utils/popup/full_screen_loader.dart';
 import 'package:ecommerce/utils/popup/loaders.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,6 +17,8 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -49,8 +50,7 @@ class LoginController extends GetxController {
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
-      final UserCredential userCredential = await AuthenticationRepository
-          .instance
+      await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       TFullScreenLoader.stopLoading();
@@ -58,7 +58,7 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
-
+      print(e.toString());
       TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
     }
   }
@@ -86,8 +86,10 @@ class LoginController extends GetxController {
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
-      final UserCredential userCredential =
+      final userCredential =
           await AuthenticationRepository.instance.loginWithGoogle();
+
+      await userController.saveUserRecord(userCredential);
 
       TFullScreenLoader.stopLoading();
 
