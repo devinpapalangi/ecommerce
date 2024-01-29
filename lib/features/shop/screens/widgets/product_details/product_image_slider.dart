@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/commons/widgets/appbar/appbar.dart';
-import 'package:ecommerce/commons/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/commons/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import 'package:ecommerce/commons/widgets/icons/circular_icon.dart';
-import 'package:ecommerce/commons/widgets/images/rounded_images.dart';
-import 'package:ecommerce/commons/widgets/shimmer_effect/shimmer_effect.dart';
 import 'package:ecommerce/features/shop/controllers/product/image_controller.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
@@ -13,7 +10,6 @@ import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductImageSlider extends StatelessWidget {

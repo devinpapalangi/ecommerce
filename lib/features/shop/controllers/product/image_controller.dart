@@ -48,7 +48,7 @@ class ImageController extends GetxController {
               child: SizedBox(
                 width: 150,
                 child: OutlinedButton(
-                  child: Text('Close'),
+                  child: const Text('Close'),
                   onPressed: () => Get.back(),
                 ),
               ),

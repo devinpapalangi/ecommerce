@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/commons/widgets/layout/grid_layout.dart';
 import 'package:ecommerce/commons/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';

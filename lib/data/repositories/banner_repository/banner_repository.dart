@@ -41,7 +41,7 @@ class BannerRepository extends GetxController {
   Future<void> uploadDummyData(List<BannerModel> banners) async {
     try {
       final storage = Get.put(FirebaseStorageService());
-      final uuid = Uuid();
+      const uuid = Uuid();
 
       for (var banner in banners) {
         final file = await storage.getImageDataFromAssets(banner.imageUrl);

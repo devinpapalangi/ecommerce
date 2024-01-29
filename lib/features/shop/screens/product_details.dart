@@ -1,5 +1,4 @@
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
-import 'package:ecommerce/features/shop/controllers/product/image_controller.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/product_review.dart';
 import 'package:ecommerce/features/shop/screens/widgets/product_details/bottom_add_to_card.dart';

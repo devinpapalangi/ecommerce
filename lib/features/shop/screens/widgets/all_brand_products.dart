@@ -1,6 +1,5 @@
 import 'package:ecommerce/commons/widgets/appbar/appbar.dart';
 import 'package:ecommerce/features/shop/models/brand_model.dart';
-import 'package:ecommerce/features/shop/screens/widgets/all_shop/sortable_products.dart';
 import 'package:ecommerce/features/shop/screens/widgets/store/brand_cart.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 import 'package:flutter/material.dart';

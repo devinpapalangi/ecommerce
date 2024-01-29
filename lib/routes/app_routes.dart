@@ -3,7 +3,6 @@ import 'package:ecommerce/features/authentication/screens/login/login.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecommerce/features/authentication/screens/register/register.dart';
 import 'package:ecommerce/features/authentication/screens/register/verify_email.dart';
-import 'package:ecommerce/features/personalization/screens/add_new_address.dart';
 import 'package:ecommerce/features/personalization/screens/adresses.dart';
 import 'package:ecommerce/features/personalization/screens/profile.dart';
 import 'package:ecommerce/features/personalization/screens/settings.dart';

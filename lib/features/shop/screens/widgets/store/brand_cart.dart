@@ -4,7 +4,6 @@ import 'package:ecommerce/commons/widgets/images/circular_images.dart';
 import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/utils/contants/colors.dart';
 import 'package:ecommerce/utils/contants/enums.dart';
-import 'package:ecommerce/utils/contants/image_strings.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
