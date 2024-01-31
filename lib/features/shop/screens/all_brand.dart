@@ -41,7 +41,9 @@ class AllBrandScreen extends StatelessWidget {
                     brand: brand,
                     showBorder: true,
                     onTap: () => Get.to(
-                      () => const AllBrandProducts(),
+                      () => AllBrandProducts(
+                        brand: brand,
+                      ),
                     ),
                   );
                 },

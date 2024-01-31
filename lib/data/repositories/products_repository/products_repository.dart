@@ -132,4 +132,64 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong, Please try again';
     }
   }
+
+  Future<List<ProductModel>> getProductForBrand(
+      {required String brandId, int limit = -1}) async {
+    try {
+      final querySnapshot = limit == -1
+          ? await _db
+              .collection('Products')
+              .where('BrandId', isEqualTo: brandId)
+              .get()
+          : await _db
+              .collection('Products')
+              .where('BrandId', isEqualTo: brandId)
+              .limit(limit)
+              .get();
+
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+
+      return products;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> getProductForCategories(
+      {required String categoryId, int limit = -1}) async {
+    try {
+      final querySnapshot = limit == -1
+          ? await _db
+              .collection('ProductCategory')
+              .where('CategoryId', isEqualTo: categoryId)
+              .get()
+          : await _db
+              .collection('ProductCategory')
+              .where('CategoryId', isEqualTo: categoryId)
+              .limit(limit)
+              .get();
+
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+
+      return products;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong, Please try again';
+    }
+  }
 }

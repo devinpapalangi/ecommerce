@@ -1,7 +1,9 @@
 import 'package:ecommerce/features/shop/models/banner_model.dart';
+import 'package:ecommerce/features/shop/models/brand_category_model.dart';
 import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/features/shop/models/category_model.dart';
 import 'package:ecommerce/features/shop/models/product_attribute_model.dart';
+import 'package:ecommerce/features/shop/models/product_category_model.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/models/product_variation_model.dart';
 import 'package:ecommerce/utils/contants/image_strings.dart';
@@ -32,6 +34,7 @@ class DummyData {
         targetScreen: TRoutes.checkout,
         active: false),
   ];
+
   static final List<CategoryModel> categories = [
     //Parent Categories
     CategoryModel(
@@ -124,12 +127,13 @@ class DummyData {
         parentId: '4'),
   ];
 
+  //DONE BRAND
   static final List<BrandModel> brands = [
     BrandModel(
         id: '1',
-        image: TImages.nikeLogo,
-        name: 'Nike',
-        productsCount: 265,
+        image: TImages.acerlogo,
+        name: 'Acer',
+        productsCount: 200,
         isFeatured: true),
     BrandModel(
         id: '2',
@@ -138,53 +142,65 @@ class DummyData {
         productsCount: 95,
         isFeatured: true),
     BrandModel(
-        id: '8',
-        image: TImages.kenwoodLogo,
-        name: 'Kenwood',
+        id: '3',
+        image: TImages.appleLogo,
+        name: 'Apple',
         productsCount: 36,
-        isFeatured: false),
+        isFeatured: true),
     BrandModel(
-        id: '9',
-        image: TImages.ikeaLogo,
-        name: 'IKEA',
-        productsCount: 36,
+        id: '4',
+        image: TImages.hermanMillerLogo,
+        name: 'Herman Miller',
+        productsCount: 20,
         isFeatured: false),
     BrandModel(
         id: '5',
-        image: TImages.appleLogo,
-        name: 'Apple',
+        image: TImages.ikeaLogo,
+        name: 'IKEA',
         productsCount: 16,
         isFeatured: true),
     BrandModel(
-        id: '10',
-        image: TImages.acerlogo,
-        name: 'Acer',
-        productsCount: 36,
-        isFeatured: false),
-    BrandModel(
-        id: '3',
+        id: '6',
         image: TImages.jordanLogo,
         name: 'Jordan',
         productsCount: 36,
         isFeatured: true),
     BrandModel(
-        id: '4',
+        id: '7',
+        image: TImages.kenwoodLogo,
+        name: 'Kenwood',
+        productsCount: 10,
+        isFeatured: false),
+    BrandModel(
+        id: '8',
+        image: TImages.nikeLogo,
+        name: 'Nike',
+        productsCount: 500,
+        isFeatured: true),
+    BrandModel(
+        id: '9',
         image: TImages.pumaLogo,
         name: 'Puma',
-        productsCount: 65,
+        productsCount: 79,
         isFeatured: true),
     BrandModel(
-        id: '6',
-        image: TImages.zaraLogo,
-        name: 'ZARA',
-        productsCount: 36,
-        isFeatured: true),
-    BrandModel(
-        id: '7',
-        image: TImages.electronicsIcon,
+        id: '10',
+        image: TImages.samsungLogo,
         name: 'Samsung',
-        productsCount: 36,
+        productsCount: 200,
+        isFeatured: true),
+    BrandModel(
+        id: '11',
+        image: TImages.tomiLogo,
+        name: 'Tomi',
+        productsCount: 5,
         isFeatured: false),
+    BrandModel(
+        id: '12',
+        image: TImages.zaraLogo,
+        name: 'Zara',
+        productsCount: 54,
+        isFeatured: true),
   ];
 
   static final List<ProductModel> products = [
@@ -529,5 +545,59 @@ class DummyData {
       ],
       productType: 'ProductType.single',
     ), // Product Model
+  ];
+
+  static final List<BrandCategoryModel> brandCategory = [
+    BrandCategoryModel(brandId: '1', categoryId: '1'),
+    BrandCategoryModel(brandId: '2', categoryId: '1'),
+    BrandCategoryModel(brandId: '3', categoryId: '1'),
+    BrandCategoryModel(brandId: '4', categoryId: '2'),
+    BrandCategoryModel(brandId: '5', categoryId: '2'),
+    BrandCategoryModel(brandId: '6', categoryId: '1'),
+    BrandCategoryModel(brandId: '7', categoryId: '2'),
+    BrandCategoryModel(brandId: '8', categoryId: '4'),
+    BrandCategoryModel(brandId: '9', categoryId: '5'),
+    BrandCategoryModel(brandId: '10', categoryId: '3'),
+    BrandCategoryModel(brandId: '11', categoryId: '5'),
+    BrandCategoryModel(brandId: '12', categoryId: '4'),
+  ];
+
+  static final List<ProductCategoryModel> productCategory = [
+    // Assign products to categories
+    // Sport Category
+    ProductCategoryModel(
+      productId: '001', // Replace with the actual product ID
+      categoryId: '9', // Replace with the actual category ID
+    ),
+    ProductCategoryModel(
+      productId: '002', // Replace with the actual product ID
+      categoryId: '10', // Replace with the actual category ID
+    ),
+    ProductCategoryModel(
+      productId: '005', // Replace with the actual product ID
+      categoryId: '11', // Replace with the actual category ID
+    ),
+
+    // Furniture Category
+    ProductCategoryModel(
+      productId: '003', // Replace with the actual product ID
+      categoryId: '12', // Replace with the actual category ID
+    ),
+
+    // Electronics Category
+    ProductCategoryModel(
+      productId: '006', // Replace with the actual product ID
+      categoryId: '15', // Replace with the actual category ID
+    ),
+    ProductCategoryModel(
+      productId: '007', // Replace with the actual product ID
+      categoryId: '16', // Replace with the actual category ID
+    ),
+
+    // Cloth Category
+    ProductCategoryModel(
+      productId: '004', // Replace with the actual product ID
+      categoryId: '17', // Replace with the actual category ID
+    ),
   ];
 }

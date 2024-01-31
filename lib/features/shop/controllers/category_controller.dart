@@ -1,5 +1,7 @@
 import 'package:ecommerce/data/repositories/category_repository/category_repository.dart';
+import 'package:ecommerce/data/repositories/products_repository/products_repository.dart';
 import 'package:ecommerce/features/shop/models/category_model.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/popup/loaders.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,7 @@ class CategoryController extends GetxController {
   final isLoading = false.obs;
 
   final categoryRepository = Get.put(CategoryRepository());
+  final productRepository = Get.put(ProductRepository());
 
   @override
   void onInit() {
@@ -34,5 +37,13 @@ class CategoryController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<List<ProductModel>> getCategoryProducts(
+      {required String categoryId, int limit = 4}) async {
+    final products = await productRepository.getProductForCategories(
+        categoryId: categoryId, limit: 3);
+
+    return products;
   }
 }

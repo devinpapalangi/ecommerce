@@ -3,6 +3,7 @@ import 'package:ecommerce/commons/widgets/appbar/tabbar.dart';
 import 'package:ecommerce/commons/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/commons/widgets/layout/grid_layout.dart';
 import 'package:ecommerce/commons/widgets/products/cart/cart_menu_icons.dart';
+import 'package:ecommerce/commons/widgets/shimmer_effect/brand_shimmer.dart';
 import 'package:ecommerce/commons/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/controllers/brands_controller.dart';
 import 'package:ecommerce/features/shop/screens/all_brand.dart';
@@ -63,17 +64,34 @@ class StoreScreen extends StatelessWidget {
                           onPressed: () => Get.to(() => const AllBrandScreen()),
                         ),
                         const Gap(TSizes.spaceBtwItems / 1.5),
-                        GridLayout(
-                          itemCount: brandController.brands.length,
-                          mainAxisExtent: 80,
-                          itemBuilder: (_, index) {
-                            final brand = brandController.brands[index];
-                            return BrandCard(
-                              brand: brand,
-                              showBorder: false,
+                        Obx(() {
+                          if (brandController.isLoading.value) {
+                            return const BrandShimmer(itemCount: 4);
+                          }
+
+                          if (brandController.brands.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'No data found!',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .apply(color: Colors.white),
+                              ),
                             );
-                          },
-                        ),
+                          }
+                          return GridLayout(
+                            itemCount: brandController.brands.length,
+                            mainAxisExtent: 80,
+                            itemBuilder: (_, index) {
+                              final brand = brandController.brands[index];
+                              return BrandCard(
+                                brand: brand,
+                                showBorder: false,
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -87,7 +105,7 @@ class StoreScreen extends StatelessWidget {
             },
             body: TabBarView(
                 children: categoryController.featuredCategories
-                    .map((categories) => CategoryTab(category: categories.name))
+                    .map((categories) => CategoryTab(category: categories))
                     .toList())),
       ),
     );

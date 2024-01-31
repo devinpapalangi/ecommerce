@@ -89,7 +89,7 @@ class LoadDataScreen extends StatelessWidget {
                   color: TColors.primary,
                 ),
                 subtitle: 'Upload dummy brands and categories with relation',
-                onTap: () {},
+                onTap: () => controller.loadBrandCategory(),
               ),
               SettingsMenuTiles(
                 icon: Iconsax.link,
@@ -99,7 +99,7 @@ class LoadDataScreen extends StatelessWidget {
                   color: TColors.primary,
                 ),
                 subtitle: 'Upload dummy product and categories with relation',
-                onTap: () {},
+                onTap: () => controller.loadProductCategory(),
               ),
             ],
           ),

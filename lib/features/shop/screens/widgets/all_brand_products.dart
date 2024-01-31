@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class AllBrandProducts extends StatelessWidget {
-  const AllBrandProducts({super.key});
+  const AllBrandProducts({super.key, required this.brand});
 
+  final BrandModel brand;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

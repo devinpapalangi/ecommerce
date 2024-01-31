@@ -5,14 +5,15 @@ import 'package:ecommerce/features/shop/controllers/product/all_product_controll
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/widgets/all_shop/sortable_products.dart';
 import 'package:ecommerce/utils/contants/sizes.dart';
+import 'package:ecommerce/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AllProductsScreen extends StatelessWidget {
   const AllProductsScreen(
-      {super.key, required this.title, required this.query, this.futureMethod});
+      {super.key, required this.title, this.query, this.futureMethod});
   final String title;
-  final Query query;
+  final Query? query;
   final Future<List<ProductModel>>? futureMethod;
 
   @override
@@ -33,23 +34,10 @@ class AllProductsScreen extends StatelessWidget {
             builder: (context, snapshot) {
               const loader = VerticalProductShimmer();
 
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return loader;
-              }
+              final widget = TCloudHelperFunctions.checkMultiRecordState(
+                  snapshot: snapshot, loader: loader);
 
-              if (!snapshot.hasData ||
-                  snapshot.data == null ||
-                  snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text('No Data Found!'),
-                );
-              }
-
-              if (snapshot.hasError) {
-                return const Center(
-                  child: Text('Something went wrong!'),
-                );
-              }
+              if (widget != null) return widget;
 
               final products = snapshot.data!;
 

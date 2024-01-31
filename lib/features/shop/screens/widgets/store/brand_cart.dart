@@ -53,7 +53,7 @@ class BrandCard extends StatelessWidget {
                     textSizes: TextSizes.large,
                   ),
                   Text(
-                    brand.productsCount.toString(),
+                    '${brand.productsCount} products',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelMedium,
