@@ -12,6 +12,12 @@ With a total duration of 20 immersive hours splitted into 53 videos, I have docu
 4. Clean and reusable code: Increases my sense of creating a full maintanable app.
 5. Error Handling and Logging for a Smooth User Experience: Ensuring a smooth user experience, implement robust error handling and logging features.
 
+# Features
+
+1. Authentication: A dynamic state-controlled authentication to improve security and a special behaviour for new users using a splash or Onboarding screen. Authentication in this app includes sign-in and register with e-mail password and Google, and email verification.
+2. Shop: Complex business logic handling products classification by it's categories, and brand. It also covers product variations, review, cart, checkout, etc.
+3. Personalization: Complete personalization of user data
+
 # Technology Stack
 
 [![My Skills](https://skillicons.dev/icons?i=flutter,firebase)](https://skillicons.dev)
